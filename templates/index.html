@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- add bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    
+    <style>
+        .scrolling-wrapper {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+        .card {
+            display: inline-block;
+            border: none;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+    </style>
+
+    <title>Nike 官方商店。Nike TW</title>
+</head>
+
+<body>
+    <!-- add first navbar -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/joden-logo.png') }}" alt="joden" width="30" height="24">
+            </a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-expanded="false">說明</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">訂單狀態</a></li>
+                        <li><a class="dropdown-item" href="#">出貨與寄送</a></li>
+                        <li><a class="dropdown-item" href="#">退貨</a></li>
+                        <li><a class="dropdown-item" href="#">聯絡我們</a></li>
+                        <li><a class="dropdown-item" href="#">隱私權與政策</a></li>
+                        <li><a class="dropdown-item" href="#">銷售條款</a></li>
+                        <li><a class="dropdown-item" href="#">使用條款</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">傳送意見與回饋</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="#">加入我們</a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">登入</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><img src="{{ url_for('static', filename='img/nike-logo-1.png') }}" alt="nike" width="50" height="24"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="mt-3">
+                        <h2 class="text-center">你的萬用 NIKE 帳號</h1>
+                        <div class="mb-3 mt-3">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="電子郵件地址">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="密碼">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">保持登入狀態</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">登入</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary">加入我們</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- add second navbar -->
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                <img src="{{ url_for('static', filename='img/nike-logo-1.png') }}" alt="nike" width="50" height="24">
+            </a>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 link-dark">男款</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">女款</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">兒童款</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">專屬訂製</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">特惠商品</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">SNKRS</a></li>
+            </ul>
+            <div class="justify-content-end">
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-0">
+                    <input type="search" class="form-control form-control-dark" placeholder="搜尋">
+                </form>
+            </div>
+            <div class="col-md-0 text-end">
+                <button type="button" class="btn btn-outline-info me-2">最愛</button>
+                <a href="{{ url_for('shopcar') }}" type="button" class="btn btn-warning">結帳</a>
+            </div>
+        </header>
+    </div>
+    <!-- add info line -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container justify-content-center">
+            <h6>新款特惠</h6>
+        </div>
+        <p class="container justify-content-center">選購全新特惠折扣商品，最高享 6 折優惠，數量有限。 立即選購</p>
+    </nav>
+    <!-- add joden -->
+    <div class="text-center mt-5">
+        <img src="{{ url_for('static', filename='img/joden-logo.png') }}" class="rounded" alt="joden" width="100" height="100">
+    </div>
+    <!-- add another section -->
+    <div class="sticky-top bg-white">
+        <ul class="nav justify-content-center mt-5">
+            <li class="nav-item">
+                <a class="nav-link link-dark" href="#">新品發售</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-dark" href="#">Jordan Sport</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-dark" href="#">男款</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-dark" href="#">女款</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-dark" href="#">兒童款</a>
+            </li>
+        </ul>
+    </div>
+    <!-- add video -->
+    <div id="trailer" class="section d-flex justify-content-center embed-responsive embed-responsive-16by9 mt-5">
+        <iframe width="1120" height="630" src="https://www.youtube.com/embed/6eukZl6kg4E?autoplay=1&mute=1"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
+    <!-- add section -->
+    <nav class="navbar mt-5">
+        <div class="container justify-content-center">
+            <h1>你的存在意義非凡</h1>
+        </div>
+        <p class="container justify-content-center mt-3">我們每個人身上都有 Jordan 家族 DNA，擁有勤奮、決心、 帥氣和動力，精誠所至金石為開， 因為你的存在意義非凡。
+        </p>
+        <div class="container justify-content-center mt-3">
+            <button type="button" class="btn btn-dark rounded-pill">了解更多訊息</button>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>選購新品</h2>
+    </div>
+    <!-- add img -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="{{ url_for('lists') }}">
+                        <img src="{{ url_for('static', filename='img/1.jpeg') }}" alt="1" style="width:100%">
+                        <div class="bg-light d-flex justify-content-between link-dark mt-2">
+                            <div>Air Jordan 1 高筒 Zoom</div>
+                            <div>$6,300</div>
+                        </div>
+                        <p class="link-dark">男鞋</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="{{ url_for('lists') }}">
+                        <img src="{{ url_for('static', filename='img/2.jpeg') }}" alt="2" style="width:100%">
+                        <div class="bg-light d-flex justify-content-between link-dark mt-2">
+                            <div>Jordan LS</div>
+                            <div>$2,500</div>
+                        </div>
+                        <p class="link-dark">拖鞋</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="{{ url_for('lists') }}">
+                        <img src="{{ url_for('static', filename='img/3.jpeg') }}" alt="3" style="width:100%">
+                        <div class="bg-light d-flex justify-content-between link-dark mt-2">
+                            <div>Jordan One Take 2 PF</div>
+                            <div>$3,600</div>
+                        </div>
+                        <p class="link-dark">籃球鞋</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add section -->
+    <!-- <div class="container mt-5">
+        <img src="4.jpg" class="img-fluid" alt="4">
+    </div> -->
+    <div class="container card bg-white text-white mt-5 rounded mx-auto d-block">
+        <img src="{{ url_for('static', filename='img/4.jpg') }}" class="img-fluid" alt="4">
+        <div class="card-img-overlay">
+            <div class="container position-absolute bottom-0 start-1 mb-3">
+                <h5 class="card-title">Jordan MA2</h5>
+                <h2 class="card-text">邁向無限可能</2>
+                <div>
+                    <a href="#" class="btn btn-dark mt-3">選購</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2>日常風格</h2>
+    </div>
+    <div class="container mt-4">
+        <div class="row justify-content-evenly">
+            <div class="col-6">
+                <img src="{{ url_for('static', filename='img/5.jpeg') }}" class="img-fluid" alt="4">
+            </div>
+            <div class="col-6">
+                <img src="{{ url_for('static', filename='img/6.jpeg') }}" class="img-fluid" alt="4">
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2>JORDAN 男款</h2>
+    </div>
+    <div class="container mt-5">
+        <img src="{{ url_for('static', filename='img/7.jpeg') }}" class="img-fluid" alt="4">
+    </div>
+
+    <div class="container mt-5">
+        <h2>選購 JORDAN 產品</h2>
+    </div>
+    <div class="container mt-5">
+        <img src="{{ url_for('static', filename='img/8.jpeg') }}" class="img-fluid" alt="4">
+    </div>
+
+    <nav class="navbar mt-5">
+        <div class="container justify-content-center">
+            <h6>'Family'</h6>
+        </div>
+        <h1 class="container justify-content-center mt-3">JORDAN 'WHY NOT?'</h1>
+        <h1 class="container justify-content-center">ZERO.4</h1>
+        <div class="container justify-content-center mt-3">
+            <button type="button" class="btn btn-dark me-2 rounded-pill">選購</button>
+            <button type="button" class="btn btn-dark rounded-pill">進一步探索</button>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>進一步探索 JORDAN</h2>
+    </div>
+    <div class="container mt-4">
+        <div class="row justify-content-evenly">
+            <div class="col-6">
+                <img src="{{ url_for('static', filename='img/9.jpeg') }}" class="img-fluid" alt="4">
+            </div>
+            <div class="col-6">
+                <img src="{{ url_for('static', filename='img/10.jpeg') }}" class="img-fluid" alt="4">
+            </div>
+        </div>
+    </div>
+
+    <!-- add section -->
+    <nav class="navbar mt-5">
+        <div class="container justify-content-center">
+            <img src="{{ url_for('static', filename='img/11.png') }}" class="img-fluid" alt="11">
+        </div>
+        <h1 class="container justify-content-center mt-3">JORDAN BRAND WINGS</h1>
+        <p class="container justify-content-center mt-3">幫助年輕人開創璀璨新未來。</p>
+        <div class="container justify-content-center mt-3">
+            <button type="button" class="btn btn-dark rounded-pill">了解更多訊息</button>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>探索 JORDAN 必備單品</h2>
+    </div>
+    <!-- add img -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='img/12.png') }}" alt="12" style="width:100%">
+                        <p class="link-dark mt-3">服飾</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='img/13.png') }}" alt="13" style="width:100%">
+                        <p class="link-dark mt-3">鞋款</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='img/14.png') }}" alt="14" style="width:100%">
+                        <p class="link-dark mt-3">運動裝備</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-5 text-dark">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Jordan 鞋款</h5>
+                <ul class="list-unstyled mt-3">
+                    <li>
+                        <a href="#!" class="text-dark">所有 Jordan 鞋款</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">最新 Jordan 鞋款</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">Jordan 運動生活</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">Jordan 籃球</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">Jordan 男鞋</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">Jordan 女鞋</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">兒童 Jordan 鞋款</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">Jordan 服飾</h5>
+                <ul class="list-unstyled mt-3">
+                    <li>
+                        <a href="#!" class="text-dark">所有 Jordan 服飾</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">上衣與 T 恤</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">外套</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">長褲</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">短褲</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">Jordan 運動裝備推薦</h5>
+                <ul class="list-unstyled mt-3">
+                    <li>
+                        <a href="#!" class="text-dark">所有 Jordan 配件</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">手提袋與背包</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">帽子</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">襪子</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">精選</h5>
+                <ul class="list-unstyled mt-3">
+                    <li>
+                        <a href="#!" class="text-dark">所有 Jordan 產品</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">新品發售</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">女款 Jordan</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-dark">男款 Jordan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--Grid row-->
+    </div>
+
+
+
+<!-- Footer -->
+<footer class="bg-dark text-center text-lg-start mt-5">
+    <!-- Grid container -->
+    <div class="container p-4 text-white">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">尋找商店</h5>
+                <ul class="list-unstyled mb-0">
+                    <li>
+                        <a href="#!" class="text-white">加入會員</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">訂閱最新訊息</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">傳送意見回饋</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">取得協助</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!" class="text-white">訂單狀態</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">出貨與寄送</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">退貨</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">付款選項</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">聯絡我們</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">關於 Nike</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!" class="text-white">最新消息</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">職涯發展</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">投資者</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="text-white">環境永續性</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+            <div class="container col-lg-2 col-md-6 mb-4 mb-md-0">
+                <a class="text-decoration-none" href="https://twitter.com/Nike">
+                    <svg class="social-link-icon" width="30px" fill="#456"
+                        height="30px" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0C9.813 0 7.8.533 5.96 1.6A11.793 11.793 0 0 0 1.6 5.96C.533 7.8 0 9.813 0 12s.533 4.2 1.6 6.04a11.793 11.793 0 0 0 4.36 4.36C7.8 23.467 9.813 24 12 24s4.2-.533 6.04-1.6a11.793 11.793 0 0 0 4.36-4.36C23.467 16.2 24 14.187 24 12s-.533-4.2-1.6-6.04a11.793 11.793 0 0 0-4.36-4.36C16.2.533 14.187 0 12 0zm6 9.28v.4c0 1.387-.333 2.72-1 4a8.186 8.186 0 0 1-2.84 3.12c-1.333.853-2.827 1.28-4.48 1.28a8.535 8.535 0 0 1-4.56-1.28h.72c1.387 0 2.613-.427 3.68-1.28-.64 0-1.213-.2-1.72-.6-.507-.4-.867-.92-1.08-1.56l.56.16c.373 0 .64-.053.8-.16a2.67 2.67 0 0 1-1.72-1 2.913 2.913 0 0 1-.68-1.88c.427.267.88.4 1.36.4-.907-.533-1.36-1.36-1.36-2.48 0-.533.133-1.04.4-1.52.8.96 1.72 1.707 2.76 2.24a8.133 8.133 0 0 0 3.4.88c-.107-.16-.16-.4-.16-.72 0-.8.293-1.493.88-2.08s1.28-.88 2.08-.88 1.547.293 2.24.88c.48-.107 1.12-.347 1.92-.72-.213.747-.64 1.28-1.28 1.6H18c.747-.16 1.28-.32 1.6-.48-.533.693-1.067 1.253-1.6 1.68z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="text-decoration-none" href="https://www.facebook.com/nike" data-pre="ILink">
+                    <svg class="social-link-icon" width="30px" fill="#456" height="30px" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0C9.813 0 7.8.533 5.96 1.6A11.793 11.793 0 0 0 1.6 5.96C.533 7.8 0 9.813 0 12s.533 4.2 1.6 6.04a11.793 11.793 0 0 0 4.36 4.36C7.8 23.467 9.813 24 12 24s4.2-.533 6.04-1.6a11.793 11.793 0 0 0 4.36-4.36C23.467 16.2 24 14.187 24 12s-.533-4.2-1.6-6.04a11.793 11.793 0 0 0-4.36-4.36C16.2.533 14.187 0 12 0zm3.12 12h-2v7.2H10.4V12H8.64V9.52h1.76V8c0-1.12.187-1.92.56-2.4.427-.587 1.2-.88 2.32-.88h2V7.2h-1.2c-.427 0-.693.067-.8.2-.107.133-.16.387-.16.76v1.2h2.16L15.12 12z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="text-decoration-none" href="https://www.youtube.com/user/nike" data-pre="ILink">
+                    <svg class="social-link-icon" width="30px" fill="#456" height="30px" viewBox="0 0 24 24">
+                        <path
+                            d="M11.28 17.6a.604.604 0 0 1-.2.24.43.43 0 0 1-.24.08c-.08 0-.133-.027-.16-.08a.557.557 0 0 1-.04-.24v-2.96h-.72v3.28a1 1 0 0 0 .12.52c.08.133.2.2.36.2.16 0 .307-.053.44-.16.133-.107.28-.24.44-.4v.48H12v-3.92h-.72v2.96zM6.96 14v-.8H9.6v.8h-.88v4.56h-.88V14h-.88zm4.96-4.72c-.107 0-.2-.04-.28-.12a.384.384 0 0 1-.12-.28v-2.4c0-.053.027-.107.08-.16.053-.053.147-.08.28-.08.133 0 .24.027.32.08a.27.27 0 0 1 .12.24v2.32c0 .107-.04.2-.12.28a.384.384 0 0 1-.28.12zm2 8.32c0-.64.027-1.307.08-2 0-.107-.04-.2-.12-.28-.08-.08-.16-.12-.24-.12h-.12l-.24.16v2.4l.24.16.16.08c.107 0 .173-.027.2-.08.027-.053.04-.16.04-.32zm.08-3.04c.213 0 .387.08.52.24.133.16.2.4.2.72v2.24c0 .267-.053.48-.16.64a.422.422 0 0 1-.44.2 2.1 2.1 0 0 1-.48-.12.506.506 0 0 1-.28-.24v.32h-.8V13.2h.8v1.76c.107-.107.213-.2.32-.28a.532.532 0 0 1 .32-.12zm3.92 5.12c.267-.213.427-.907.48-2.08.053-.587.107-1.147.16-1.68 0-.48-.053-1.013-.16-1.6-.107-1.173-.28-1.893-.52-2.16-.24-.267-1.267-.453-3.08-.56l-2.64-.08-2.72.08c-1.813.107-2.84.293-3.08.56-.24.267-.413.987-.52 2.16a16.07 16.07 0 0 0-.08 1.6c0 .533.027 1.093.08 1.68.107 1.173.28 1.88.52 2.12.24.24 1.267.44 3.08.6l2.72.08 2.64-.08c1.813-.16 2.853-.347 3.12-.56v-.08zM8.4 4h-.96l1.12 3.6v2.24h.96v-2.4L10.64 4h-.96l-.56 2.32h-.08L8.4 4zm2.32 2.56V8.8c0 .373.107.667.32.88.213.213.507.32.88.32s.667-.107.88-.32c.213-.213.32-.507.32-.88V6.56c0-.32-.107-.587-.32-.8-.213-.213-.507-.32-.88-.32s-.667.107-.88.32c-.213.213-.32.48-.32.8zm3.12-.96v3.6a1 1 0 0 0 .12.52c.08.133.213.2.4.2.187 0 .36-.04.52-.12.16-.08.32-.2.48-.36v.48h.88V5.6h-.88v3.2a.523.523 0 0 1-.24.24.645.645 0 0 1-.28.08c-.08 0-.133-.013-.16-.04-.027-.027-.04-.093-.04-.2V5.52h-.8v.08zM12 0c2.187 0 4.2.533 6.04 1.6a11.793 11.793 0 0 1 4.36 4.36C23.467 7.8 24 9.813 24 12s-.533 4.2-1.6 6.04a11.793 11.793 0 0 1-4.36 4.36C16.2 23.467 14.187 24 12 24s-4.2-.533-6.04-1.6a11.793 11.793 0 0 1-4.36-4.36C.533 16.2 0 14.187 0 12s.533-4.2 1.6-6.04A11.793 11.793 0 0 1 5.96 1.6C7.8.533 9.813 0 12 0zm4.56 16.08l-.08-.4c0-.16-.027-.28-.08-.36a.27.27 0 0 0-.24-.12.27.27 0 0 0-.24.12c-.053.08-.08.2-.08.36v.4h.72zm-.32-1.52c.32 0 .573.093.76.28.187.187.28.467.28.84v.96h-1.44v.8c0 .16.027.28.08.36.053.08.147.12.28.12.133 0 .227-.04.28-.12.053-.08.08-.227.08-.44v-.16h.72v.24c0 .373-.093.667-.28.88-.187.213-.453.32-.8.32-.347 0-.613-.107-.8-.32-.187-.213-.28-.507-.28-.88v-1.76c0-.32.107-.587.32-.8.213-.213.48-.32.8-.32z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="text-decoration-none" href="https://instagram.com/nike">
+                    <svg class="social-link-icon" width="30px" fill="#456" height="30px" viewBox="0 0 24 24">
+                        <path
+                            d="M16 12.48a4.723 4.723 0 0 1-.56 1.48 3.93 3.93 0 0 1-1.04 1.16 3.428 3.428 0 0 1-1.92.68 3.628 3.628 0 0 1-1.96-.48 3.414 3.414 0 0 1-1.4-1.48c-.48-.96-.587-1.973-.32-3.04H7.68l.08 5.52c0 .107.04.213.12.32.08.107.173.16.28.16h8.32c.107 0 .213-.053.32-.16.107-.107.16-.213.16-.32V10.8h-1.12c.16.533.213 1.093.16 1.68zm-3.68 2c.64 0 1.2-.24 1.68-.72s.72-1.053.72-1.72a2.56 2.56 0 0 0-.68-1.76c-.453-.507-1.013-.76-1.68-.76s-1.24.24-1.72.72-.72 1.053-.72 1.72.227 1.253.68 1.76c.453.507 1 .76 1.64.76h.08zm4.16-7.6h-1.12c-.107 0-.213.053-.32.16-.107.107-.16.213-.16.32v1.36c.107.213.267.32.48.32h1.12c.16 0 .28-.053.36-.16a.532.532 0 0 0 .12-.32v-1.2c0-.107-.053-.213-.16-.32-.107-.107-.213-.16-.32-.16zM12 0C9.813 0 7.8.533 5.96 1.6A11.793 11.793 0 0 0 1.6 5.96C.533 7.8 0 9.813 0 12s.533 4.2 1.6 6.04a11.793 11.793 0 0 0 4.36 4.36C7.8 23.467 9.813 24 12 24s4.2-.533 6.04-1.6a11.793 11.793 0 0 0 4.36-4.36C23.467 16.2 24 14.187 24 12s-.533-4.2-1.6-6.04a11.793 11.793 0 0 0-4.36-4.36C16.2.533 14.187 0 12 0zm6.24 16.88l-.08.08v.08a.926.926 0 0 1-.28.68 1.3 1.3 0 0 1-.68.36H7.52a.871.871 0 0 1-.68-.32 1.536 1.536 0 0 1-.36-.72l-.08-.16.08-9.84c0-.267.093-.507.28-.72.187-.213.413-.347.68-.4h9.68a1.3 1.3 0 0 1 .68.36 1.3 1.3 0 0 1 .36.68l.08 9.92z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <nav class="navbar p-3 text-white" style="background-color: rgba(0, 0, 0, 0.87);">
+        <!-- left -->
+        <div class="justify-content-start p-3 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+            <a class="text-white px-3" href="#">台灣</a>
+            © 2021 Nike, Inc. All Rights Reserved
+        </div>
+        <!-- right -->
+        <div class="navbar justify-content-end p-2">
+            <ul class="nav">
+                <li class="nav-item dropup">
+                    <a class="nav-link dropdown-toggle link-light" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-expanded="false">指南</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">訂單狀態</a></li>
+                        <li><a class="dropdown-item" href="#">出貨與寄送</a></li>
+                        <li><a class="dropdown-item" href="#">退貨</a></li>
+                        <li><a class="dropdown-item" href="#">聯絡我們</a></li>
+                        <li><a class="dropdown-item" href="#">隱私權與政策</a></li>
+                        <li><a class="dropdown-item" href="#">銷售條款</a></li>
+                        <li><a class="dropdown-item" href="#">使用條款</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">傳送意見與回饋</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="#">銷售條款</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="#">使用條款</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="#">Nike 隱私權政策</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- add bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
